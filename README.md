@@ -1,5 +1,5 @@
 # Windows-10-IoT-LTSC-Convert
-Script to automate sidegrading any Windows 10 install to Windows 10 IoT LTSC
+Script to automate sidegrading any Windows 10 64 bit installation to Windows 10 IoT LTSC
 
 ## Requirements
 - Admin rights
