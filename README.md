@@ -22,4 +22,5 @@ The ISO gets mounted and `setup.exe` is started with following parameters:
 1. To run this script you have to open a PowerShell window with administrative privileges, by opening the start menu, searching for `powershell.exe` and clicking "Run as administrator", or pressing Ctrl + Shift + Enter
 2. After opening an admin PowerShell window, paste this command and press enter:
 ```pwsh
-Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process; Invoke-WebRequest 'https://raw.githubusercontent.com/emmi-ari/Windows-10-IoT-LTSC-Convert/refs/heads/main/IoT_Sidegrade.ps1' | Invoke-Expression```
+Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process; Invoke-WebRequest 'https://raw.githubusercontent.com/emmi-ari/Windows-10-IoT-LTSC-Convert/refs/heads/main/IoT_Sidegrade.ps1' | Invoke-Expression
+```
