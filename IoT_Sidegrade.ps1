@@ -18,12 +18,14 @@ function Restore-RegistryValues {
         Write-Output "An additional error occured while trying to restore the registry."
         Write-Output "Key HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\EditionID should be reset to $($regValues.EditionID)"
         Write-Output "Key HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProductName should be reset to $($regValues.ProductName)"
+        
         if ($null -eq $exitOnError) {
             Write-Error $Error -ErrorAction Ignore
         }
         else {
             Write-Error $Error -ErrorAction Stop
         }
+
         return -1
     }
 
@@ -56,6 +58,7 @@ try {
     $fileSelectionDlg.Filter = "ISO Files (*.iso)|*.iso"
     $fileSelectionDlg.Title  = "Select Windows 10 IoT Enterprise LTSC 2021 ISO file..."
     $dlgResult = $fileSelectionDlg.ShowDialog()
+
     if ($dlgResult -eq "OK") {
         $imagePath = $fileSelectionDlg.FileName
         Write-Output "Selected ISO file: $($imagePath)"
@@ -94,8 +97,9 @@ try {
     #region Get WIM index of IoTEnterpriseS image
     Write-Output "Searching install medium for right index of the IoT Enterprise LTSC installer..."
     $imagePath = "$($mountVol):\sources\install.wim"
+
     if (Test-Path $imagePath) {
-        $installWim = Get-WindowsImage -ImagePath $imagePath # TODO Add case handeling if it's not a wim image
+        $installWim = Get-WindowsImage -ImagePath $imagePath
     }
     else {
         Write-Output "The install medium either contains the installatin images in an unsupported format (only WIM images are supported, ESD images don't work with this script) or the selected ISO does not contain a Windows installer. Aborting."
@@ -126,8 +130,10 @@ finally {
         exit
         #endregion
     }
+
     Write-Host "Exiting script, reverting registry changes..."
     $retVal += Restore-RegistryValues $currentVersion $retVal $True
+
     if ($null -ne $mountVol) {
         Dismount-DiskImage -ImagePath $imagePath | Out-Null
     }
