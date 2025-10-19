@@ -93,7 +93,16 @@ try {
 
     #region Get WIM index of IoTEnterpriseS image
     Write-Output "Searching install medium for right index of the IoT Enterprise LTSC installer..."
-    $installWim = Get-WindowsImage -ImagePath "$($mountVol):\sources\install.wim" # TODO Add case handeling if it's not a wim image
+    $imagePath = "$($mountVol):\sources\install.wim"
+    if (Test-Path $imagePath) {
+        $installWim = Get-WindowsImage -ImagePath $imagePath # TODO Add case handeling if it's not a wim image
+    }
+    else {
+        Write-Output "The install medium either contains the installatin images in an unsupported format (only WIM images are supported, ESD images don't work with this script) or the selected ISO does not contain a Windows installer. Aborting."
+        $retVal -= 20
+        exit
+    }
+
     for ($i = 0; $i -lt $installWim.Count; $i++) {
         if ($installWim[$i].ImageName -eq "Windows 10 IoT Enterprise LTSC") {
             $imageIndex = $i + 1 # Adding 1, because WIM indexes start with 1 instead of 0
