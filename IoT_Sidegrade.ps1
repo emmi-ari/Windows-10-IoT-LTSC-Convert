@@ -1,4 +1,6 @@
-#Requires -RunAsAdministrator
+if (!(New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+    Write-Error -Message "Script needs to be run with administrator privileges. Aborting." -ErrorAction Stop
+}
 
 function Restore-RegistryValues {
     param(
@@ -18,7 +20,7 @@ function Restore-RegistryValues {
         Write-Output "An additional error occured while trying to restore the registry."
         Write-Output "Key HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\EditionID should be reset to $($regValues.EditionID)"
         Write-Output "Key HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProductName should be reset to $($regValues.ProductName)"
-        
+
         if ($null -eq $exitOnError) {
             Write-Error $Error -ErrorAction Ignore
         }
