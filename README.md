@@ -3,7 +3,7 @@ Script to automate sidegrading any Windows 10 64 bit installation to Windows 10 
 
 ## Requirements
 - Admin rights
-- Windows 10 IoT Enterprise LTSC 2021 ISO
+- Windows 10 IoT Enterprise LTSC 2021 ISO (see below)
 
 ## What does this script do exactly
 The script sets the registry keys that reflect the current Windows 10 Version that is installed. This is done in order to tell the installer, that the currently installed version of Windows is already the IoT Enterprise LTSC version. If this wouldn't be done, upgrading, whilst keeping programs and settings wouldn't be possible.
