@@ -24,3 +24,7 @@ The ISO gets mounted and `setup.exe` is started with following parameters:
 ```pwsh
 Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process; Invoke-WebRequest 'https://raw.githubusercontent.com/emmi-ari/Windows-10-IoT-LTSC-Convert/refs/heads/main/IoT_Sidegrade.ps1' | Invoke-Expression
 ```
+
+## Where to find the right ISO?
+Option 1: [massgrave.dev](https://drive.massgrave.dev/en-us_windows_10_iot_enterprise_ltsc_2021_x64_dvd_257ad90f.iso)
+Option 2: [archive.org](https://archive.org/details/en-us_windows_10_iot_enterprise_ltsc_2021_x64_dvd_257ad90f_202301)
